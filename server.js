@@ -8,8 +8,6 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-console.log(port);
-
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -32,6 +30,15 @@ app.post("/submit", async (req, res) => {
   try {
     const savedText = await newText.save();
     res.status(200).json(savedText);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+app.get("/", async (req, res) => {
+  try {
+    const texts = await Text.find();
+    res.status(200).json(texts);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
