@@ -67,7 +67,7 @@ app.delete("/delete/:id", async (req, res) => {
 });
 
 app.get("/delete",(req,res)=>{
-  res.send("Hello World")
+  res.send("Delete route established...")
 })
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
