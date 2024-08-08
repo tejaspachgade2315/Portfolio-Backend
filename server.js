@@ -44,4 +44,30 @@ app.get("/", async (req, res) => {
   }
 });
 
+app.put("/update/:id", async (req, res) => {
+  try {
+    const updatedText = await Text.findByIdAndUpdate(
+      req.params.id,
+      { text: req.body.text },
+      { new: true }
+    );
+    res.status(200).json(updatedText);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+app.delete("/delete/:id", async (req, res) => {
+  try {
+    const deletedText = await Text.findByIdAndDelete(req.params.id);
+    res.status(200).json(deletedText);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+app.get("/delete",(req,res)=>{
+  res.send("Hello World")
+})
+
 app.listen(port, () => console.log(`Server running on port ${port}`));
